@@ -14,12 +14,11 @@ app.get("/api", (req, res) => {
 });
 
 app.post("/create-payment-intent", async (req, res) => {
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: 5000,
-    currency: "usd",
-  });
-  res.send({
-    ClientSecret: paymentIntent.client_secret,
+  await stripe.paymentIntents.create({
+    amount: req.body.amount,
+    currency: "NGN",
+    statement_descriptor: req.body.event,
+    payment_method_types: ["card"],
   });
 });
 
