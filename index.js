@@ -20,6 +20,9 @@ app.post("/create-payment-intent", async (req, res) => {
     statement_descriptor: req.body.event,
     payment_method_types: ["card"],
   });
+  res.send({
+    ClientSecret: paymentIntent.client_secret,
+  });
 });
 
 app.listen(port, () => {
